@@ -14,24 +14,28 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(logger("dev"));
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.engine("handlebars", exphbs({
+  defaultLayout: "main",
+  layoutsDir: app.get('views') + '/layouts',
+  partialsDir: [app.get('views') + '/partials']
+}));
+
 app.set("view engine", "handlebars");
 
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/advantage", {
-  useMongoClient: true
-})
+mongoose.connect("mongodb://localhost/advantage");
+mongoose.connection.on('open', () => console.log('🌎 Mongoose connected!') );
 
-app.get("/", function(req, res) {
+app.get("/", (req, res) => {
   res.redirect("/scrape");
 });
 
-app.get("/scrape", function(req, res){
-  axios.get("http://www.echojs.com/").then(function(response) {
+app.get("/scrape", (req, res) => {
+  axios.get("http://www.echojs.com/").then(response => {
 
       let $ = cheerio.load(response.data);
 
-      $("article h2").each(function(i, element) {
+      $("article h2").each(element => {
         var result = {};
 
         result.title = $(this)
@@ -45,23 +49,18 @@ app.get("/scrape", function(req, res){
           .create(result)
       })
     })
-    .then(function(dbArticle) {
-      res.send("Scrape Complete");
-    })
-    .catch(function(err) {
-      res.json(err);
-    });
+    .then(dbArticle => res.send("Scrape Complete") )
+    .catch(err => res.json(err) );
 });
 
-app.get("/articles", function(req, res) {
+app.get("/articles", (req, res) => {
   db.Article
     .find({})
-    .then(function(dbArticle) {
-      res.json(dbArticle);
+    .then(dbArticle => {
+      //res.json(dbArticle);
+      res.render("index", dbArticle);
     })
-    .catch(function(err) {
-      res.json(err);
-    });
+    .catch(err => res.json(err) );
 });
 
-app.listen(PORT, () => console.log("Listening on port:", PORT) );
+app.listen(PORT, () => console.log("🌎 live on http://localhost:", PORT) );
