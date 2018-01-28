@@ -35,7 +35,7 @@ app.get("/scrape", (req, res) => {
   axios.get("http://www.echojs.com/")
        .then(response => {
 
-      let $ = cheerio.load(response.data);
+      var $ = cheerio.load(response.data);
 
       $("article h2").each(element => {
         var result = {};
@@ -51,16 +51,20 @@ app.get("/scrape", (req, res) => {
           .create(result)
       })
     })
-    .then(dbArticle => res.send("Scrape Complete") )
-    .catch(err => res.json(err) );
+    .then(function(dbArticle) {
+      res.send("Scrape Complete");
+    })
+    .catch(function(err){
+      res.json(err);
+    });
 });
 
 app.get("/articles", (req, res) => {
   db.Article
     .find({})
     .then(dbArticle => {
-      //res.json(dbArticle);
-      res.render("index", dbArticle);
+      res.json(dbArticle);
+      //res.render("index", dbArticle);
     })
     .catch(err => res.json(err) );
 });
