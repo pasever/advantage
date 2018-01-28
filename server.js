@@ -31,7 +31,9 @@ app.get("/", (req, res) => {
 });
 
 app.get("/scrape", (req, res) => {
-  axios.get("http://www.echojs.com/").then(response => {
+
+  axios.get("http://www.echojs.com/")
+       .then(response => {
 
       let $ = cheerio.load(response.data);
 
@@ -63,4 +65,4 @@ app.get("/articles", (req, res) => {
     .catch(err => res.json(err) );
 });
 
-app.listen(PORT, () => console.log("🌎 live on http://localhost:", PORT) );
+app.listen(PORT, () => console.log("🌎 Live on http://localhost:", PORT) );
