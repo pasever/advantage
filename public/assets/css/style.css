@@ -5,7 +5,29 @@ body {
   font-size: 16px;
   /* text-transform: uppercase; */
 }
+article h3 {
+  font-weight: bold;
+}
+q {
+  quotes: "“" "”" "‘" "’";
+}
+q:before {
+    content: open-quote;
+}
+q:after {
+    content: close-quote;
+}
+#wrapper  {
+  padding-top: 7%;
+}
 
+#wrapper q {
+  font-size: 18px;
+  padding-left: 20%;
+}
+#wrapper h1 {
+  font-size: 40px;
+}
 h1 {
   text-align: center;
 }
@@ -15,7 +37,7 @@ h1 {
 
 hr {
   display: block;
-  margin-top: 0.5em;
+  margin-top: 1em;
   margin-bottom: 0.5em;
   margin-left: auto;
   margin-right: auto;
@@ -81,10 +103,4 @@ ul.primary li a {
 .bg-info {
   height: 50px;
   padding-top: 2%;
-}
-
-.mytable {
-  padding: 8px 8px;
-  /* display: table-cell; */
-  /* vertical-align: top; */
 }
