@@ -4,48 +4,28 @@
   <q>Programs must be written for people to read,
     and only incidentally for machines to execute...</q>
 </div>
-
-<div id="articles">
-</div>
-
-<div id="notes">
-</div>
+<hr />
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-9">
+    <div class="col-lg-8">
 
-      <article>
-        <h3>
-          What Have We Been Up To?
-        </h3>
-        <h4>
-          It’s been a while since we’ve shared any news here,
-          but that doesn’t mean we’ve been sitting still.
-          In fact, both Tom and I have been involved...
-        </h4>
-        <hr>
-      </article>
+      {{#each dbArticle }}
+        <article>
+          <h3>
+        {{ this.title }}
+      </h3>
+      <h4>
+        {{ this.summary }}
+        <a href="http://www.discovermeteor.com{{this.link}}" target="_blank">here</a>
+      </h4>
+          <hr>
+        </article>
+      {{/each}}
 
-      <article>
-        <h3>
-          What Have We Been Up To?
-        </h3>
-        <h4>
-          It’s been a while since we’ve shared any news here,
-          but that doesn’t mean we’ve been sitting still.
-          In fact, both Tom and I have been involved...
-        </h4>
-      <hr>
-      </article>
     </div>
 
-    <ul>
-
-    {{ dbArticle }}
-    </ul>
-
-    <div class="col-lg-3">
+    <div class="col-lg-4">
     </div>
   </div>
 </div>

@@ -19,6 +19,7 @@ q:after {
 }
 #wrapper  {
   padding-top: 7%;
+  padding-bottom: 1%;
 }
 
 #wrapper q {
@@ -35,9 +36,15 @@ h1 {
   display: inline;
 }
 
+#mySearch {
+  margin-top: 7%;
+  margin-left: 10px;
+
+}
+
 hr {
   display: block;
-  margin-top: 1em;
+  margin-top: 2em;
   margin-bottom: 0.5em;
   margin-left: auto;
   margin-right: auto;
@@ -89,7 +96,7 @@ nav {
 }
 
 .primary {
-  width: 75%;
+  width: 85%;
   padding-left: 15%;
   margin:0 auto;
   list-style:none;
