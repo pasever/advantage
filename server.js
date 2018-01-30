@@ -23,7 +23,9 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/advantage");
+mongoose.connect("mongodb://localhost/advantage", {
+  useMongoClient: true
+});
 mongoose.connection.on('open', () => console.log('🌎 Mongoose connected!') );
 
 app.get("/", (req, res) => {
@@ -32,28 +34,39 @@ app.get("/", (req, res) => {
 
 app.get("/scrape", (req, res) => {
 
-  axios.get("http://www.echojs.com/")
-       .then(response => {
+  axios.get("http://www.discovermeteor.com/blog/").then(function(response) {
 
       var $ = cheerio.load(response.data);
 
-      $("article h2").each(element => {
+      $("article .summary").each(function(i,element) {
         var result = {};
 
         result.title = $(this)
+          .children("h3")
           .children("a")
           .text();
+          console.log("Results title:" + result.title);
+
+        result.summary = $(this)
+          .children(".summary-content")
+          .text();
+          console.log("Results Summary:" + result.summary);
+
         result.link = $(this)
+          .children("h3")
           .children("a")
           .attr("href");
+          console.log("Results link:" + result.link);
 
         db.Article
           .create(result)
       })
     })
+
     .then(function(dbArticle) {
       res.send("Scrape Complete");
     })
+
     .catch(function(err){
       res.json(err);
     });
@@ -63,8 +76,8 @@ app.get("/articles", (req, res) => {
   db.Article
     .find({})
     .then(dbArticle => {
-      res.json(dbArticle);
-      //res.render("index", dbArticle);
+      //res.json(dbArticle);
+      res.render("index", dbArticle);
     })
     .catch(err => res.json(err) );
 });

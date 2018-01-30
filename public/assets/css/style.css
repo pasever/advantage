@@ -1,13 +1,26 @@
 body {
   height: 100%;
-  background: #ccc;
-  font-family: helvetica, arial, serif;
-  font-size: 14px;
+  /* background-color: rgb(252, 237, 237); */
+  font-family: Garamond, arial, serif;
+  font-size: 16px;
   /* text-transform: uppercase; */
 }
 
+h1 {
+  text-align: center;
+}
 .wrap {
   display: inline;
+}
+
+hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
 }
 
 .decor {
@@ -63,4 +76,15 @@ nav {
 ul.primary li a {
   display: block;
   padding: 20px 30px;
+}
+
+.bg-info {
+  height: 50px;
+  padding-top: 2%;
+}
+
+.mytable {
+  padding: 8px 8px;
+  /* display: table-cell; */
+  /* vertical-align: top; */
 }

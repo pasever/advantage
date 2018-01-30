@@ -5,12 +5,17 @@ const mongoose = require("mongoose"),
 const ArticleSchema = new Schema({
   title: {
         type: String,
-    required: true
+    required: false
+  },
+
+  summary: {
+        type: String,
+    required: false
   },
 
   link: {
         type: String,
-    required: true
+    required: false
   },
 
   note: {
