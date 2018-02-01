@@ -1,3 +1,16 @@
+$(".mybutton").click((e) => {
+  e.preventDefault();
+  leavenote();
+});
+
+function leavenote() {
+  $("#notesdiv").css("display", "block");
+}
+$(".cancelbtn").click((e) => {
+  e.preventDefault();
+  $("#notesdiv").css("display", "none");
+});
+
 $.getJSON("/articles", function(data) {
 
   for (var i = 0; i < data.length; i++) {

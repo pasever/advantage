@@ -71,7 +71,7 @@ a {
   color: #fff;
 }
 
-.mybotton {
+.mybutton {
   width: 110px;
   height: 45px;
   margin-top: 25%;
@@ -131,4 +131,40 @@ ul.primary li a {
 .bg-info {
   height: 50px;
   padding-top: 2%;
+}
+
+.form {
+  border-radius: 2px;
+  padding: 20px 30px;
+  box-shadow: 0 0 15px;
+  font-size: 14px;
+  font-weight: bold;
+  float: right;
+  position: sticky;
+}
+#notesdiv {
+  opacity: 0.92;
+  /*position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background: #000;
+  padding-bottom: 15%; */
+  display: none;
+}
+
+#notes {
+  width: 65%;
+  min-height:350px;
+  /* margin: 0px; */
+  background-color: white;
+  font-family: 'Fauna One', serif;
+  position: relative;
+  border: 5px solid rgb(90, 158, 181);
+  margin-right: 20%;
+  /* margin-left: 20%;
+  margin-right: 20%; */
+  /* left: 0%; */
+  /*right: 210px; */
 }
