@@ -23,9 +23,7 @@ app.engine("handlebars", exphbs({
 app.set("view engine", "handlebars");
 
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/advantage", {
-  useMongoClient: true
-});
+mongoose.connect("mongodb://localhost/advantage");
 mongoose.connection.on('open', () => console.log('🌎 Mongoose connected!') );
 
 app.get("/", (req, res) => {
@@ -35,28 +33,38 @@ app.get("/", (req, res) => {
 app.get("/scrape", (req, res) => {
 
   axios.get("http://www.discovermeteor.com/blog/").then(function(response) {
-
+      //console.log(response.data);
       var $ = cheerio.load(response.data);
 
-      $("article .summary").each(function(i,element) {
+      $("article").each(function(i,element) {
         var result = {};
 
         result.title = $(this)
+          .children(".summary")
           .children("h3")
           .children("a")
           .text();
-          console.log("Results title:" + result.title);
+          //console.log("Results title:" + result.title);
+
+        result.image = $(this)
+        .children(".post-thumbnail")
+        .children()
+        .children()
+        .attr("src");
+        //console.log("Reult image:" + result.image);
 
         result.summary = $(this)
+          .children(".summary")
           .children(".summary-content")
           .text();
-          console.log("Results Summary:" + result.summary);
+        //  console.log("Results Summary:" + result.summary);
 
         result.link = $(this)
+          .children(".summary")
           .children("h3")
           .children("a")
           .attr("href");
-          console.log("Results link:" + result.link);
+          //console.log("Results link: " + result.link);
 
         db.Article
           .create(result)
@@ -65,6 +73,7 @@ app.get("/scrape", (req, res) => {
 
     .then(function(dbArticle) {
       res.send("Scrape Complete");
+      //res.redirect("/articles");
     })
 
     .catch(function(err){

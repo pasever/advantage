@@ -8,6 +8,11 @@ const ArticleSchema = new Schema({
     required: false
   },
 
+  image: {
+    type: String,
+    required: false
+  },
+
   summary: {
         type: String,
     required: false

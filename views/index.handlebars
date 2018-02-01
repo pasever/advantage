@@ -9,18 +9,23 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-8">
-
       {{#each dbArticle }}
+
+      <div class="col-lg-2">
+          <img class="thumb" src="http://www.discovermeteor.com/{{this.image}}">
+      </div>
+      <div class="col-lg-10">
         <article>
           <h3>
-        {{ this.title }}
+            <a href="http://www.discovermeteor.com{{this.link}}" target="_blank">{{ this.title }}</a>
       </h3>
       <h4>
-        {{ this.summary }}
-        <a href="http://www.discovermeteor.com{{this.link}}" target="_blank">here</a>
+        {{ this.summary }};
       </h4>
           <hr>
         </article>
+      </div>
+
       {{/each}}
 
     </div>

@@ -8,6 +8,13 @@ body {
 article h3 {
   font-weight: bold;
 }
+
+.thumb {
+  margin-top: 15%;
+  width: 100px;
+  height: 100px;
+  border-radius: 35px 0 35px 0;
+}
 q {
   quotes: "“" "”" "‘" "’";
 }
@@ -45,7 +52,7 @@ h1 {
 hr {
   display: block;
   margin-top: 2em;
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
   margin-left: auto;
   margin-right: auto;
   border-style: inset;
@@ -63,6 +70,11 @@ hr {
 a {
   text-decoration: none;
   color: #fff;
+}
+
+h3 a {
+  color: rgb(81, 104, 216);
+  font-size: 34px;
 }
 
 li {
