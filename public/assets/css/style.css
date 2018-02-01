@@ -46,7 +46,6 @@ h1 {
 #mySearch {
   margin-top: 7%;
   margin-left: 10px;
-
 }
 
 hr {
@@ -70,6 +69,15 @@ hr {
 a {
   text-decoration: none;
   color: #fff;
+}
+
+.mybotton {
+  width: 110px;
+  height: 45px;
+  margin-top: 25%;
+  margin-left: 15%;
+  border-radius: 12px 0 12px 0;
+  background-color: rgb(143, 203, 241);
 }
 
 h3 a {
@@ -100,11 +108,12 @@ nav {
   background-image: -o-linear-gradient(bottom, #2B2B2B 7%, #333333 100%);
   background-image: linear-gradient(bottom, #2B2B2B 7%, #333333 100%);
   text-align: center;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   text-shadow: 1px 1px 1px #0E0E0E;
   -webkit-box-shadow: 2px 2px 3px #888;
   -moz-box-shadow: 2px 2px 3px #888;
   box-shadow: 2px 2px 3px #888;
+  font-size: 16px;
 }
 
 .primary {

@@ -8,8 +8,9 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-lg-8">
-      {{#each dbArticle }}
+    {{#each dbArticle }}
+    <div class="col-lg-10">
+
 
       <div class="col-lg-2">
           <img class="thumb" src="http://www.discovermeteor.com/{{this.image}}">
@@ -26,11 +27,13 @@
         </article>
       </div>
 
-      {{/each}}
+
 
     </div>
 
-    <div class="col-lg-4">
+    <div class="col-lg-2">
+      <button class="mybotton"> Notes (0) </button>
     </div>
+    {{/each}}
   </div>
 </div>
