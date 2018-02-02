@@ -101,10 +101,30 @@ app.get("/saved", (req, res) => {
 
 });
 
-app.put('/api/:ObjectId', function (req, res) {
+app.post('/save/:id', function (req, res) {
 
-    let ObjectId = req.ObjectId;
+    let ObjectId = req.id;
+    console.log(ObjectId);
 
+});
+
+app.get("/articles/:id", function(req, res) {
+
+  console.log(req.params.id);
+
+  db.Article
+    .findOne({
+      _id: req.params.id
+    })
+    .populate("note")
+    .then(function(dbArticle) {
+      // If we were able to successfully find an Article with the given id, send it back to the client
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
 });
 
 app.listen(PORT, () => console.log("🌎 Live on http://localhost:", PORT) );

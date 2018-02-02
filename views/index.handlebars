@@ -9,13 +9,13 @@
 <div class="container">
   <div class="row">
     {{#each dbArticle }}
-    <div class="col-lg-10">
+    <div class="col-lg-10 col-md-10 col-sm-8">
 
 
-      <div class="col-lg-2">
+      <div class="col-lg-2 col-md-3 col-sm-3">
           <img class="thumb" src="http://www.discovermeteor.com/{{this.image}}">
       </div>
-      <div class="col-lg-10">
+      <div class="col-lg-10 col-md-9 col-sm-9">
         <article>
           <h3>
             <a href="http://www.discovermeteor.com{{this.link}}" target="_blank">{{ this.title }}</a>
@@ -31,9 +31,9 @@
 
     </div>
 
-    <div class="col-lg-2">
-      <button class="notButton"> Notes (0) </button>
-      <button class="favButton">Save</button>
+    <div class="col-lg-2 col-md-2 col-sm-4">
+      <button class="notButton" value={{ this._id }}> Notes (0) </button>
+      <button class="favButton" value={{ this._id }} method="POST" action="/save/:id">Save</button>
     </div>
     <div id="notesdiv">
       <form class="form" action="#" id="notes">
@@ -42,7 +42,7 @@
         <label>Name : </label>
         <input type="text" class="username" placeholder="John" />
         <input type="button" class="addNoteButton" value="Add Note" />
-        <input type="button" class="cancelbtn" value="Cancel" />
+        <input type="button" class="cancelbtn" value="Cancel"/>
         <h5>
           Great article!
         </h5>
