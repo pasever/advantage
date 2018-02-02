@@ -149,8 +149,8 @@ ul.primary li a {
 }
 #notesdiv {
   opacity: 0.92;
-  /*position: absolute;
-  top: 0px;
+  /* position: absolute; */
+  /* top: 0px;
   left: 0px;
   height: 100%;
   width: 100%;
@@ -162,14 +162,8 @@ ul.primary li a {
 #notes {
   width: 65%;
   min-height:350px;
-  /* margin: 0px; */
   background-color: white;
-  font-family: 'Fauna One', serif;
   position: relative;
   border: 5px solid rgb(90, 158, 181);
   margin-right: 20%;
-  /* margin-left: 20%;
-  margin-right: 20%; */
-  /* left: 0%; */
-  /*right: 210px; */
 }

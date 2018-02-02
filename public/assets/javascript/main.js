@@ -25,15 +25,12 @@ function leavenote() {
 $(".cancelbtn").click((e) => {
   e.preventDefault();
   $("#notesdiv").css("display", "none");
+  alertify.alert("Message");
 });
 
-$.getJSON("/articles", function(data) {
+
+$.getJSON("/saved", function(data) {
   console.log(data);
-
-  for (var i = 0; i < data.length; i++) {
-
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-  }
 });
 
 

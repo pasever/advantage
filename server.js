@@ -27,7 +27,7 @@ mongoose.connect("mongodb://localhost/advantage");
 mongoose.connection.on('open', () => console.log('🌎 Mongoose connected!') );
 
 app.get("/", (req, res) => {
-  res.redirect("/scrape");
+  res.render("index");
 });
 
 app.get("/scrape", (req, res) => {
@@ -103,7 +103,7 @@ app.get("/saved", (req, res) => {
 
 app.put('/api/:ObjectId', function (req, res) {
 
-    let company = req.ObjectId;
+    let ObjectId = req.ObjectId;
 
 });
 
