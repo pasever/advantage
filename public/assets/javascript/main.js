@@ -1,4 +1,4 @@
-$(".mybutton").click((e) => {
+$(".notButton").click((e) => {
   e.preventDefault();
   leavenote();
 });
@@ -12,6 +12,7 @@ $(".cancelbtn").click((e) => {
 });
 
 $.getJSON("/articles", function(data) {
+  console.log(data);
 
   for (var i = 0; i < data.length; i++) {
 

@@ -6,7 +6,7 @@ const express = require("express"),
        exphbs = require("express-handlebars"),
        logger = require("morgan"),
         axios = require("axios"),
-         PORT = process.env.PORT || 8500,
+         PORT = process.env.PORT || 9500,
           app = express(),
            db = require("./models");
 
@@ -72,8 +72,8 @@ app.get("/scrape", (req, res) => {
     })
 
     .then(function(dbArticle) {
-      res.send("Scrape Complete");
-      //res.redirect("/articles");
+      //res.send("Scrape Complete");
+      res.redirect("/articles");
     })
 
     .catch(function(err){
@@ -89,6 +89,16 @@ app.get("/articles", (req, res) => {
       res.render("index", {dbArticle: dbArticle});
     })
     .catch(err => res.json(err) );
+});
+
+app.get("/saved", (req, res) => {
+  db.Article
+    .find({ saved: true })
+    .then(function(dbArticle){
+      res.render("saved", { dbArticle:dbArticle });
+    })
+    .catch(err => res.json(err) );
+
 });
 
 app.listen(PORT, () => console.log("🌎 Live on http://localhost:", PORT) );

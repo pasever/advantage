@@ -18,6 +18,12 @@ const ArticleSchema = new Schema({
     required: false
   },
 
+  saved: {
+        type: Boolean,
+    required: false,
+    default: false
+  },
+
   link: {
         type: String,
     required: false
