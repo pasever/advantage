@@ -82,7 +82,8 @@ a {
 }
 
 .favButton {
-  background-color: rgb(228, 159, 8); 
+  background-color: rgb(228, 159, 8);
+  /* background-color: #336699; */
 }
 h3 a {
   color: rgb(81, 104, 216);

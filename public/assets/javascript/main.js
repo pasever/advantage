@@ -3,9 +3,25 @@ $(".notButton").click((e) => {
   leavenote();
 });
 
+
+$(".favButton").click(function(e){
+  e.preventDefault();
+   if ($(this).css('background-color')=='#00cc00') {
+         $(this).css('background-color', 'rgb(228, 159, 8)');
+       }
+});
+
+$(".favButton").click(function(e){
+  e.preventDefault();
+   if ($(this).css('background-color')=='rgb(228, 159, 8)') {
+         $(this).css('background-color', '#00cc00');
+       }
+});
+
 function leavenote() {
   $("#notesdiv").css("display", "block");
 }
+
 $(".cancelbtn").click((e) => {
   e.preventDefault();
   $("#notesdiv").css("display", "none");
