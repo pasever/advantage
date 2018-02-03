@@ -12,27 +12,25 @@ $(".cancelbtn").click((e) => {
   $("#notesdiv").css("display", "none");
 });
 
-var isRed = true;
+let notSavedColor = true;
 
 $(".favButton").on("click", function(e) {
   e.preventDefault();
 
-  if ($(this).css('background-color') == 'rgb(228, 159, 8)') {
-      $(this).css('background-color', '#00cc00');
-} else if  ($(this).css('background-color') == '#00cc00') {
-      $(this).css('background-color', 'rgb(228, 159, 8)');
-}
+  if (notSavedColor) {
+    $(this).css('background-color', '#00cc00');
+  } else {
+    $(this).css('background-color', 'rgb(228, 159, 8)');
+  }
 
   let thisId = $(this).val();
-  console.log("The Obj is " + thisId);
 
   $.ajax({
     method: "PUT",
     url: "/save/" + thisId
-  })
-  .then(data => {
-  //  console.log("Color changed");
-  });
+  }).then(data => {
+      location.reload();
+    });
 });
 
 $(".notButton").on("click", function(e) {
@@ -48,17 +46,7 @@ $(".notButton").on("click", function(e) {
       thisId: thisId
     }
   });
-
 });
-
-
-
-
-
-
-
-
-
 
 
 
@@ -94,9 +82,9 @@ $(document).on("click", "p", function() {
 
   // Now make an ajax call for the Article
   $.ajax({
-    method: "GET",
-    url: "/articles/" + thisId
-  })
+      method: "GET",
+      url: "/articles/" + thisId
+    })
     // With that done, add the note information to the page
     .done(function(data) {
       console.log(data);
@@ -119,7 +107,7 @@ $(document).on("click", "p", function() {
     });
 });
 
-$(".addNoteButton").on("click", function(){
+$(".addNoteButton").on("click", function() {
 
 
 });
@@ -131,15 +119,15 @@ $(document).on("click", "#savenote", function() {
 
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
-    method: "POST",
-    url: "/articles/" + thisId,
-    data: {
-      // Value taken from title input
-      title: $("#titleinput").val(),
-      // Value taken from note textarea
-      body: $("#bodyinput").val()
-    }
-  })
+      method: "POST",
+      url: "/articles/" + thisId,
+      data: {
+        // Value taken from title input
+        title: $("#titleinput").val(),
+        // Value taken from note textarea
+        body: $("#bodyinput").val()
+      }
+    })
     // With that done
     .done(function(data) {
       // Log the response

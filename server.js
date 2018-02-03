@@ -70,7 +70,6 @@ app.get("/scrape", (req, res) => {
     })
 
     .then(function(dbArticle) {
-      //res.send("Scrape Complete");
       res.redirect("/articles");
     })
 
@@ -87,24 +86,22 @@ app.get("/articles", async (req, res) => {
       dbArticle,
       dblen
     });
-  } catch (e) {
-    res.json({e});
+  } catch (err) {
+    res.json(err);
   }
 });
 
-app.get("/saved", (req, res) => {
-  db.Article
-    .find({
-      saved: true
-    })
-    .then(function(dbArticle) {
-      console.log(dbArticle.length);
+app.get("/saved", async (req, res) => {
+try {
+  const dbArticle = await db.Article.find({ saved: true });
+
       res.render("saved", {
         dbArticle: dbArticle,
         dblen: dbArticle.length
       });
-    })
-    .catch(err => res.json(err));
+  } catch(err) {
+    res.json(err);
+  }
 });
 
 app.put("/save/:id", function(req, res) {
@@ -113,15 +110,15 @@ app.put("/save/:id", function(req, res) {
 
   db.Article
     .updateOne({
-      _id: id
-    }, {
-      saved: true
-    })
-    .then(function(dbArticle) {
-        res.render("saved", {
-        dbArticle: dbArticle
-      });
-    })
+    _id: id
+  }, {
+    saved: true
+  })
+  .then(function(dbArticle) {
+      res.render("saved", {
+      dbArticle: dbArticle
+    });
+  })
 });
 
 app.get("/articles/:id", function(req, res) {

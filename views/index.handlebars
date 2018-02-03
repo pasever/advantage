@@ -1,16 +1,7 @@
-<div id="wrapper">
-  <h1>JS News Scraper</h1>
-  <h1><b>Lets keep in you the loop</b></h1>
-  <q>Programs must be written for people to read,
-    and only incidentally for machines to execute...</q>
-</div>
-<hr />
-
 <div class="container">
   <div class="row">
     {{#each dbArticle }}
     <div class="col-lg-10 col-md-10 col-sm-8">
-
 
       <div class="col-lg-2 col-md-3 col-sm-3">
           <img class="thumb" src="http://www.discovermeteor.com/{{this.image}}">
@@ -27,13 +18,11 @@
         </article>
       </div>
 
-
-
     </div>
 
     <div class="col-lg-2 col-md-2 col-sm-4">
       <button class="notButton" value={{ this._id }}> Notes (0) </button>
-      <button class="favButton" value={{ this._id }} method="POST" action="/save/:id">Save</button>
+      <button class="favButton" value={{ this._id }}>Save</button>
     </div>
     <div id="notesdiv">
       <form class="form" action="#" id="notes">
