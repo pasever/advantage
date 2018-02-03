@@ -1,17 +1,19 @@
 const express = require("express"),
-   bodyParser = require("body-parser"),
-     mongoose = require("mongoose"),
-      request = require("request"),
-      cheerio = require("cheerio"),
-       exphbs = require("express-handlebars"),
-       logger = require("morgan"),
-        axios = require("axios"),
-         PORT = process.env.PORT || 9500,
-          app = express(),
-           db = require("./models");
+  bodyParser = require("body-parser"),
+  mongoose = require("mongoose"),
+  request = require("request"),
+  cheerio = require("cheerio"),
+  exphbs = require("express-handlebars"),
+  logger = require("morgan"),
+  axios = require("axios"),
+  PORT = process.env.PORT || 9500,
+  app = express(),
+  db = require("./models");
 
 app.use(express.static("public"));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(logger("dev"));
 
 app.engine("handlebars", exphbs({
@@ -24,7 +26,7 @@ app.set("view engine", "handlebars");
 
 mongoose.Promise = Promise;
 mongoose.connect("mongodb://localhost/advantage");
-mongoose.connection.on('open', () => console.log('🌎 Mongoose connected!') );
+mongoose.connection.on('open', () => console.log('🌎 Mongoose connected!'));
 
 app.get("/", (req, res) => {
   res.render("index");
@@ -33,10 +35,10 @@ app.get("/", (req, res) => {
 app.get("/scrape", (req, res) => {
 
   axios.get("http://www.discovermeteor.com/blog/").then(function(response) {
-      //console.log(response.data);
+
       var $ = cheerio.load(response.data);
 
-      $("article").each(function(i,element) {
+      $("article").each(function(i, element) {
         var result = {};
 
         result.title = $(this)
@@ -44,27 +46,23 @@ app.get("/scrape", (req, res) => {
           .children("h3")
           .children("a")
           .text();
-          //console.log("Results title:" + result.title);
 
         result.image = $(this)
-        .children(".post-thumbnail")
-        .children()
-        .children()
-        .attr("src");
-        //console.log("Reult image:" + result.image);
+          .children(".post-thumbnail")
+          .children()
+          .children()
+          .attr("src");
 
         result.summary = $(this)
           .children(".summary")
           .children(".summary-content")
           .text();
-        //  console.log("Results Summary:" + result.summary);
 
         result.link = $(this)
           .children(".summary")
           .children("h3")
           .children("a")
           .attr("href");
-          //console.log("Results link: " + result.link);
 
         db.Article
           .create(result)
@@ -76,36 +74,54 @@ app.get("/scrape", (req, res) => {
       res.redirect("/articles");
     })
 
-    .catch(function(err){
+    .catch(function(err) {
       res.json(err);
     });
 });
 
-app.get("/articles", (req, res) => {
-  db.Article
-    .find({})
-    .then(function(dbArticle) {
-      //res.json(dbArticle);
-      res.render("index", {dbArticle: dbArticle});
-    })
-    .catch(err => res.json(err) );
+app.get("/articles", async (req, res) => {
+  try {
+        const dblen = await db.Article.find({saved: true}).count();
+    const dbArticle = await db.Article.find({});
+    res.render('index', {
+      dbArticle,
+      dblen
+    });
+  } catch (e) {
+    res.json({e});
+  }
 });
 
 app.get("/saved", (req, res) => {
   db.Article
-    .find({ saved: true })
-    .then(function(dbArticle){
-      res.render("saved", { dbArticle:dbArticle });
+    .find({
+      saved: true
     })
-    .catch(err => res.json(err) );
-
+    .then(function(dbArticle) {
+      console.log(dbArticle.length);
+      res.render("saved", {
+        dbArticle: dbArticle,
+        dblen: dbArticle.length
+      });
+    })
+    .catch(err => res.json(err));
 });
 
-app.post('/save/:id', function (req, res) {
+app.put("/save/:id", function(req, res) {
 
-    let ObjectId = req.id;
-    console.log(ObjectId);
+  const { id } = req.params;
 
+  db.Article
+    .updateOne({
+      _id: id
+    }, {
+      saved: true
+    })
+    .then(function(dbArticle) {
+        res.render("saved", {
+        dbArticle: dbArticle
+      });
+    })
 });
 
 app.get("/articles/:id", function(req, res) {
@@ -118,13 +134,11 @@ app.get("/articles/:id", function(req, res) {
     })
     .populate("note")
     .then(function(dbArticle) {
-      // If we were able to successfully find an Article with the given id, send it back to the client
       res.json(dbArticle);
     })
     .catch(function(err) {
-      // If an error occurred, send it to the client
       res.json(err);
     });
 });
 
-app.listen(PORT, () => console.log("🌎 Live on http://localhost:", PORT) );
+app.listen(PORT, () => console.log("🌎 Live on http://localhost:", PORT));

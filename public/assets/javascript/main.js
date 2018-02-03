@@ -3,21 +3,6 @@ $(".notButton").click((e) => {
   leavenote();
 });
 
-
-$(".favButton").click(function(e){
-  e.preventDefault();
-   if ($(this).css('background-color')=='#00cc00') {
-         $(this).css('background-color', 'rgb(228, 159, 8)');
-       }
-});
-
-$(".favButton").click(function(e){
-  e.preventDefault();
-   if ($(this).css('background-color')=='rgb(228, 159, 8)') {
-         $(this).css('background-color', '#00cc00');
-       }
-});
-
 function leavenote() {
   $("#notesdiv").css("display", "block");
 }
@@ -27,24 +12,30 @@ $(".cancelbtn").click((e) => {
   $("#notesdiv").css("display", "none");
 });
 
+var isRed = true;
 
-$(".favButton").click(function(e) {
+$(".favButton").on("click", function(e) {
   e.preventDefault();
 
+  if ($(this).css('background-color') == 'rgb(228, 159, 8)') {
+      $(this).css('background-color', '#00cc00');
+} else if  ($(this).css('background-color') == '#00cc00') {
+      $(this).css('background-color', 'rgb(228, 159, 8)');
+}
+
   let thisId = $(this).val();
-  console.log(thisId);
+  console.log("The Obj is " + thisId);
 
   $.ajax({
-    method: "POST",
-    url: "/save/:id",
-    data: {
-      thisId: thisId
-    }
+    method: "PUT",
+    url: "/save/" + thisId
+  })
+  .then(data => {
+  //  console.log("Color changed");
   });
-
 });
 
-$(".notButton").click(function(e) {
+$(".notButton").on("click", function(e) {
   e.preventDefault();
 
   let thisId = $(this).val();
@@ -59,6 +50,41 @@ $(".notButton").click(function(e) {
   });
 
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 $(document).on("click", "p", function() {
   // Empty the notes from the note section
@@ -94,7 +120,7 @@ $(document).on("click", "p", function() {
 });
 
 $(".addNoteButton").on("click", function(){
-  
+
 
 });
 
