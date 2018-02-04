@@ -1,42 +1,43 @@
 <div class="container">
   <div class="row">
     {{#each dbArticle }}
-    <div class="col-lg-10 col-md-10 col-sm-8">
+      <div class="col-lg-10 col-md-10 col-sm-8">
 
-      <div class="col-lg-2 col-md-3 col-sm-3">
+        <div class="col-lg-2 col-md-3 col-sm-3">
           <img class="thumb" src="http://www.discovermeteor.com/{{this.image}}">
-      </div>
-      <div class="col-lg-10 col-md-9 col-sm-9">
-        <article>
-          <h3>
-            <a href="http://www.discovermeteor.com{{this.link}}" target="_blank">{{ this.title }}</a>
-      </h3>
-      <h4>
-        {{ this.summary }};
-      </h4>
-          <hr>
-        </article>
+        </div>
+        <div class="col-lg-10 col-md-9 col-sm-9">
+          <article>
+            <h3>
+              <a href="http://www.discovermeteor.com{{this.link}}" target="_blank">{{ this.title }}</a>
+            </h3>
+            <h4>
+              {{ this.summary }};
+            </h4>
+            <hr>
+          </article>
+        </div>
+
       </div>
 
-    </div>
-
-    <div class="col-lg-2 col-md-2 col-sm-4">
-      <button class="notButton" value={{ this._id }}> Notes (0) </button>
-      <button class="favButton" value={{ this._id }}>Save</button>
-    </div>
-    <div id="notesdiv">
-      <form class="form" action="#" id="notes">
-        <h3>Add a note below</h3>
-        <hr/>
-        <label>Name : </label>
-        <input type="text" class="username" placeholder="John" />
-        <input type="button" class="addNoteButton" value="Add Note" />
-        <input type="button" class="cancelbtn" value="Cancel"/>
-        <h5>
+      <div class="col-lg-2 col-md-2 col-sm-4">
+        <button class="notButton" value= {{ this._id }}> Notes (0) </button>
+        <button class="favButton" value= {{ this._id }}>Save</button>
+      </div>
+      <div id="notesdiv">
+        <form class="form" action="/articles/:id" method="POST" id="notes">
+          <h3>Add a note below</h3>
+          <hr/>
+          <label>Name : </label>
+          <input type="text" class="username" placeholder="John" />
+          <input type="text" class="comment" placeholder="Comments..." />
+          <input type="button" class="addNoteButton" data-id={{ this._id }} value="Add Note" />
+          <input type="button" class="cancelbtn" value="Cancel" />
+          <h5>
           David: Great article!
         </h5>
-      </form>
-    </div>
+        </form>
+      </div>
 
     {{/each}}
   </div>

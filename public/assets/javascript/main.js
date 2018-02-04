@@ -17,20 +17,26 @@ let notSavedColor = true;
 $(".favButton").on("click", function(e) {
   e.preventDefault();
 
+  notSavedColor = !notSavedColor;
+
   if (notSavedColor) {
     $(this).css('background-color', '#00cc00');
+    $(this).text('Unsave');
   } else {
     $(this).css('background-color', 'rgb(228, 159, 8)');
+    $(this).text('Save');
   }
+
 
   let thisId = $(this).val();
 
   $.ajax({
     method: "PUT",
     url: "/save/" + thisId
-  }).then(data => {
-      location.reload();
-    });
+  })
+  // .then(data => {
+  //     location.reload();
+  //   });
 });
 
 $(".notButton").on("click", function(e) {
@@ -43,10 +49,51 @@ $(".notButton").on("click", function(e) {
     method: "GET",
     url: "/articles/:id",
     data: {
-      thisId: thisId
+      _id: thisId
     }
   });
 });
+
+$(".addNoteButton").on("click", function(e) {
+  e.preventDefault();
+  let thisId = $(".addNoteButton").data("id");
+  console.log("The note id is " + thisId);
+
+  $.ajax({
+      method: "POST",
+      url: "/articles/" + thisId,
+      data: {
+        name: $(".username").val(),
+        note: $(".comment").val(),
+        thisId: thisId
+      }
+    });
+
+    $(".username").val("");
+    $(".comment").val("");
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
