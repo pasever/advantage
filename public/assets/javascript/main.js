@@ -17,15 +17,18 @@ let notSavedColor = true;
 $(".favButton").on("click", function(e) {
   e.preventDefault();
 
-  notSavedColor = !notSavedColor;
+    notSavedColor = !notSavedColor;
 
   if (notSavedColor) {
-    $(this).css('background-color', '#00cc00');
+    //$(this).css('background-color', '#00cc00');
+    $(this).removeClass('unsavedColor').addClass('savedColor');
     $(this).text('Unsave');
   } else {
-    $(this).css('background-color', 'rgb(228, 159, 8)');
+    //$(this).css('background-color', 'rgb(228, 159, 8)');
+    $(this).removeClass('savedColor').addClass('unsavedColor');;
     $(this).text('Save');
   }
+
 
 
   let thisId = $(this).val();
@@ -42,14 +45,14 @@ $(".favButton").on("click", function(e) {
 $(".notButton").on("click", function(e) {
   e.preventDefault();
 
-  let thisId = $(this).val();
+  // let thisId = $(this).val();
   console.log(thisId);
 
   $.ajax({
     method: "GET",
     url: "/articles/:id",
     data: {
-      _id: thisId
+      _id: $(this).val()
     }
   });
 });
@@ -73,7 +76,17 @@ $(".addNoteButton").on("click", function(e) {
     $(".comment").val("");
 });
 
+$(document).ready(function(){
 
+  $.ajax({ 
+    method: "GET",
+    url: "/notes"
+   })
+    .done(function(data){
+      console.log("This is the data :" + data);
+    })
+ 
+});
 
 
 

@@ -83,7 +83,6 @@ a {
 
 .favButton {
   background-color: rgb(228, 159, 8);
-  /* background-color: #336699; */
 }
 h3 a {
   color: rgb(81, 104, 216);
@@ -166,4 +165,10 @@ ul.primary li a {
   position: relative;
   border: 5px solid rgb(90, 158, 181);
   margin-right: 20%;
+}
+.savedColor {
+  background-color: #00cc00;
+}
+.unsavedColor {
+  background-color: rgb(228, 159, 8);
 }

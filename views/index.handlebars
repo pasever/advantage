@@ -33,12 +33,15 @@
           <input type="text" class="comment" placeholder="Comments..." />
           <input type="button" class="addNoteButton" data-id={{ this._id }} value="Add Note" />
           <input type="button" class="cancelbtn" value="Cancel" />
-          <h5>
-          David: Great article!
-        </h5>
+          {{#each dbNotes}}
+          <h5><b>David: </b>Great article</h5>
+          <h5><b>{{this.name}}: </b>{{this.note}}</h5>
+         {{/each}}
+          <h5><b>David: </b>Great article</h5>
+          
         </form>
       </div>
-
+   
     {{/each}}
   </div>
 </div>
